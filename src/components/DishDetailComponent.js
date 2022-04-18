@@ -6,30 +6,53 @@ class DishDetail extends Component {
     super(props);
     this.state = {};
   }
-  render() {
-    const comments = this.props.dish.comments.map((comment) => {
-      return (
-        <div>
-          <p>{comment.comment}</p>
-          <p>--{comment.author}, {comment.date}</p>
-        </div>
-      );
-    });
+  renderComments(comments) {
     return (
-      <div className="row justify-content-center m-1">
-        <Card  key={this.props.dish.id} className="col-12 col-md-5">
-          <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
-          <CardBody>
-            <CardTitle>{this.props.dish.name}</CardTitle>
-            <CardText>{this.props.dish.description}</CardText>
-          </CardBody>
-        </Card>
-        <div className="col-12 col-md-5 m-1">
-            <h2>Comments</h2>
-            {comments}
-        </div>
+      <div className="col-12 col-md-5 m-1">
+        <h4>Comments</h4>
+        <ul className="list-unstyled">
+        {comments.map((comment) => {
+          return (
+            <li>
+              <p>{comment.comment}</p>
+              <p>
+                --{comment.author}, {comment.date}
+              </p>
+            </li>
+          );
+        })}
+        </ul>
       </div>
     );
+  }
+  renderDish(dish) {
+    if (dish != null) {
+      return (
+        <div className="row justify-content-center">
+          <Card key={dish.id} className="col-12 col-md-5 m-1">
+            <CardImg top src={dish.image} alt={dish.name} className="img-responsive"/>
+            <CardBody>
+              <CardTitle>{dish.name}</CardTitle>
+              <CardText>{dish.description}</CardText>
+            </CardBody>
+          </Card>
+          {this.renderComments(dish.comments)}
+        </div>
+      );
+    } else return <div></div>;
+  }
+  render() {
+    // const comments = this.props.dish.comments.map((comment) => {
+    //   return (
+    //     <div>
+    //       <p>{comment.comment}</p>
+    //       <p>
+    //         --{comment.author}, {comment.date}
+    //       </p>
+    //     </div>
+    //   );
+    // });
+    return this.renderDish(this.props.dish);
   }
 }
 

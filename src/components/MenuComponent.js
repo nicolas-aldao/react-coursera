@@ -4,8 +4,6 @@ import {
   Card,
   CardImg,
   CardImgOverlay,
-  CardText,
-  CardBody,
   CardTitle,
 } from "reactstrap";
 
@@ -43,7 +41,7 @@ class Menu extends Component {
       <div className="container">
         <div className="row justify-content-center">{menu}</div>
         <div className="row justify-content-center">
-          <div className="">
+          <div>
             {/* col-12 col-md-5 m-1 */}
             {this.renderDish(this.state.selectedDish)}
           </div>
