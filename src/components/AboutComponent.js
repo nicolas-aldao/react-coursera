@@ -103,7 +103,7 @@ function About(props) {
         </div>
         <Media list>
           {props.leaders.map((leader) => {
-            return <RenderLeader leader={leader} />;
+            return <RenderLeader key={leader.id} leader={leader} />;
           })}
         </Media>
       </div>
