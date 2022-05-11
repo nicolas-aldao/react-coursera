@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,8 +9,6 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
-import { Link } from "react-router-dom";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -41,9 +41,15 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
-    // event.preventDefault();
+    this.props.postFeedback(
+      values.firstname,
+      values.lastname,
+      values.telnum,
+      values.email,
+      values.agree,
+      values.contactType,
+      values.message
+    );
   }
   render() {
     return (

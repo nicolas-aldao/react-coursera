@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -16,7 +17,6 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {

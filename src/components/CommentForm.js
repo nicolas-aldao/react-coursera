@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Control, LocalForm, Errors } from "react-redux-form";
 import {
   Button,
   Modal,
@@ -7,7 +8,6 @@ import {
   FormGroup,
   Label,
 } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -36,8 +36,12 @@ class CommentForm extends Component {
     });
   }
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    this.props.postComment(
+      this.props.dishId,
+      values.rating,
+      values.author,
+      values.comment
+    );
   }
   render() {
     return (
@@ -90,12 +94,12 @@ class CommentForm extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="comments">Comments</Label>
+                <Label htmlFor="comment">Comments</Label>
                 <Control.textarea
-                  model=".comments"
+                  model=".comment"
                   className="form-control"
-                  id="comments"
-                  name="comments"
+                  id="comment"
+                  name="comment"
                   rows="6"
                 ></Control.textarea>
               </FormGroup>
