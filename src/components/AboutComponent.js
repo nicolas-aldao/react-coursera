@@ -12,13 +12,8 @@ import { baseUrl } from "../shared/baseUrl";
 import { Loading } from "./LoadingComponent";
 import { Stagger, Fade } from "react-animation-components";
 
-function RenderLeader({ leader, isLoading, errMess }) {
-  console.log(isLoading);
-  if (isLoading) {
-    return <Loading />;
-  } else if (errMess) {
-    return <h4>{errMess}</h4>;
-  } else {
+function About(props) {
+  function RenderLeader({ leader }) {
     return (
       <div className="row" key={leader.id}>
         <div className="col-12 col-sm-2">
@@ -32,9 +27,35 @@ function RenderLeader({ leader, isLoading, errMess }) {
       </div>
     );
   }
-}
 
-function About(props) {
+  function ErrorLoadingShowLeaders() {
+    if (props.leaders.isLoading) {
+      return <Loading />;
+    }
+    if (props.leaders.errMess) {
+      return <h4>{props.leaders.errMess}</h4>;
+    } else if (props.leaders.leaders.length > 0) {
+      return (
+        <div>
+          <Media list>
+            <Stagger in>
+              {props.leaders.leaders.map((leader) => {
+                return (
+                  <Fade in key={leader.id}>
+                    <RenderLeader
+                      leader={leader}
+                      isLoading={props.leaders.isLoading}
+                      errMess={props.leaders.errMess}
+                    />
+                  </Fade>
+                );
+              })}
+            </Stagger>
+          </Media>
+        </div>
+      );
+    }
+  }
   return (
     <div className="container">
       <div className="row">
@@ -110,22 +131,7 @@ function About(props) {
         <div className="col-12">
           <h2>Corporate Leadership</h2>
         </div>
-
-        <Media list>
-          <Stagger in>
-            {props.leaders.leaders.map((leader) => {
-              return (
-                <Fade in key={leader.id}>
-                  <RenderLeader
-                    leader={leader}
-                    isLoading={props.leaderLoading}
-                    errMess={props.leaderErrMess}
-                  />
-                </Fade>
-              );
-            })}
-          </Stagger>
-        </Media>
+        <ErrorLoadingShowLeaders />
       </div>
     </div>
   );

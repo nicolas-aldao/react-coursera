@@ -6,12 +6,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
 
-//const root = ReactDOM.render(document.getElementById('root'));
 ReactDOM.render(
   <React.Fragment>
     <App />
   </React.Fragment>,
   document.getElementById("root")
 );
-
-// reportWebVitals();

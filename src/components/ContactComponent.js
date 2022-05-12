@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -50,6 +50,8 @@ class Contact extends Component {
       values.contactType,
       values.message
     );
+    this.props.resetFeedBackForm();
+    alert("Thank you for your feedback!\n" + JSON.stringify(values));
   }
   render() {
     return (
@@ -99,7 +101,7 @@ class Contact extends Component {
               >
                 <i className="fa fa-phone"></i> Call
               </a>
-              <a role="button" className="btn btn-info">
+              <a role="button" className="btn btn-info" href="/#">
                 <i className="fa fa-skype"></i> Skype
               </a>
               <a
@@ -117,7 +119,7 @@ class Contact extends Component {
             <h3>Send us your Feedback</h3>
           </div>
           <div className="col-12 col-md-9">
-            <LocalForm onSubmit={(value) => this.handleSubmit(value)}>
+            <Form model="feedback" onSubmit={(value) => this.handleSubmit(value)}>
               <Row className="form-group">
                 <Label htmlFor="firstname" md={2}>
                   First Name
@@ -281,7 +283,7 @@ class Contact extends Component {
                   </Button>
                 </Col>
               </Row>
-            </LocalForm>
+            </Form>
           </div>
         </div>
       </div>

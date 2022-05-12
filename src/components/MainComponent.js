@@ -20,16 +20,15 @@ import {
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const mapDispatchToProps = (dispatch) => ({
-  // addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
   fetchDishes: () => {
     dispatch(fetchDishes());
   },
-  // resetFeedbackForm: () => {
-  //   dispatch(actions.reset("feedback"));
-  // },
   fetchComments: () => dispatch(fetchComments()),
   fetchPromos: () => dispatch(fetchPromos()),
   fetchLeaders: () => dispatch(fetchLeaders()),
+  resetFeedBackForm: () => {
+    dispatch(actions.reset('feedback'))
+  },
   postComment: (dishId, rating, author, comment) =>
     dispatch(postComment(dishId, rating, author, comment)),
   postFeedback: (
@@ -77,17 +76,6 @@ class Main extends Component {
   render() {
     const DishWithId = ({ match }) => {
       return (
-        // <DishDetail
-        //   dish={
-        //     this.props.dishes.filter(
-        //       (dish) => dish.id === parseInt(match.params.dishId, 10)
-        //     )[0]
-        //   }
-        //   comments={this.props.comments.filter(
-        //     (comment) => comment.dishId === parseInt(match.params.dishId, 10)
-        //   )}
-        //   addComment={this.props.addComment}
-        // />
         <DishDetail
           dish={
             this.props.dishes.dishes.filter(
@@ -148,8 +136,8 @@ class Main extends Component {
                 path="/contactus"
                 component={() => (
                   <Contact
-                    // resetFeedbackForm={this.props.resetFeedbackForm}
                     postFeedback={this.props.postFeedback}
+                    resetFeedBackForm={this.props.resetFeedBackForm}
                   />
                 )}
               />
@@ -159,10 +147,9 @@ class Main extends Component {
                 component={() => (
                   <About
                     leaders={this.props.leaders}
-                    //isLoading={this.props.leadersLoading}
-                    //errMess={this.props.leadersErrMess}
-                    leaderLoading={this.props.leaders.isLoading}
-                    leaderErrMess={this.props.leaders.errMess}
+                    leaderLoading={this.props.isLoading}
+                    leaderErrMess={this.props.errMess}
+                    
                   />
                 )}
               />
